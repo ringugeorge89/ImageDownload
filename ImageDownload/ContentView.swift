@@ -8,14 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var courses = CourseService()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            List {
+                
+                ForEach(courses.courses, id: \.self) { course in
+                    
+                    
+                    HStack {
+                        
+                        Image("")
+                            .frame(width: 120, height: 70)
+                            .background(Color.gray)
+                        Text(course.name)
+                            .bold()
+                        
+                    }
+                    
+                }
+                
+            }
+            .navigationTitle("Courses")
+            .onAppear{
+                courses.getCourseList()
+            }
         }
-        .padding()
     }
 }
 
